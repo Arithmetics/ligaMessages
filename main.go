@@ -1,11 +1,14 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
+	"io/ioutil"
 )
 
 func main() {
-	fmt.Println("yooooo")
 	allMessages := convertCSV("LigaTexts.csv")
-	fmt.Println(len(allMessages))
+	messagesToStats(allMessages)
+
+	file, _ := json.MarshalIndent(personStats, "", " ")
+	_ = ioutil.WriteFile("test.json", file, 0644)
 }

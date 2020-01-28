@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/csv"
 	"os"
+	"regexp"
 	"strconv"
 )
 
@@ -54,14 +55,14 @@ func convertCSV(filename string) []*message {
 	if err != nil {
 		panic(err)
 	}
-
+	re := regexp.MustCompile("[[:^ascii:]]")
 	// Loop through lines & turn into object
 	for _, line := range lines {
 		ts, _ := strconv.Atoi(line[1])
 		person := phoneLookup[line[4]]
-
+		cleanText := re.ReplaceAllLiteralString(line[0], "")
 		data := message{
-			Text:      line[0],
+			Text:      cleanText,
 			Timestamp: ts,
 			Person:    person,
 		}

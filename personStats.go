@@ -34,7 +34,7 @@ type statBucket struct {
 	ActionsSent     *map[string]int `json:"actionsSent"`
 }
 
-func messagesToStats(messages []*message) {
+func messagesToPersonStats(messages []*message) {
 	lastMessage := &message{}
 
 	for i, message := range messages {

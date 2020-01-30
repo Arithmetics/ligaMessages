@@ -5,6 +5,7 @@ import (
 	"os"
 	"regexp"
 	"strconv"
+	"time"
 )
 
 var phoneLookup = map[string]string{
@@ -29,7 +30,7 @@ var phoneLookup = map[string]string{
 
 type message struct {
 	Text      string
-	Timestamp int
+	Timestamp time.Time
 	Person    string
 }
 
@@ -63,11 +64,27 @@ func convertCSV(filename string) []*message {
 		cleanText := re.ReplaceAllLiteralString(line[0], "")
 		data := message{
 			Text:      cleanText,
-			Timestamp: ts,
+			Timestamp: getAppleDate(int64(ts)),
 			Person:    person,
 		}
 		allMessages = append(allMessages, &data)
 	}
 
 	return allMessages
+}
+
+func getAppleDate(appleNanos int64) time.Time {
+	raw := int64(appleNanos)
+	dividedRaw := raw / 1000000000
+
+	layout := "2006-01-02"
+	str := "2001-01-01"
+	appleZeroDate, _ := time.Parse(layout, str)
+
+	secsSinceEpoch := appleZeroDate.Unix()
+
+	totalSecs := secsSinceEpoch + dividedRaw
+
+	finalTime := time.Unix(totalSecs, 0)
+	return finalTime
 }

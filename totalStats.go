@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	"time"
 )
 
@@ -10,6 +11,7 @@ type cumulativeStat struct {
 	TotalByHour    *map[int]int
 	TotalByDoW     *map[int]int
 	IntervalTotals *map[time.Time]int
+	AllWords       *[]string
 }
 
 var layout = "2006-01-02"
@@ -18,7 +20,8 @@ var end = "2020-01-01"
 var startingDate, _ = time.Parse(layout, start)
 var endingDate, _ = time.Parse(layout, end)
 
-var totalStats = cumulativeStat{TotalByHour: &map[int]int{}, TotalByDoW: &map[int]int{}, IntervalTotals: &map[time.Time]int{}}
+var totalStats = cumulativeStat{TotalByHour: &map[int]int{}, TotalByDoW: &map[int]int{}, IntervalTotals: &map[time.Time]int{}, AllWords: &[]string{}}
+
 var yearsIntervals = fillIntervals(startingDate, endingDate)
 
 func fillIntervals(startDate time.Time, endDate time.Time) []time.Time {
@@ -38,6 +41,18 @@ func fillIntervals(startDate time.Time, endDate time.Time) []time.Time {
 func messagesToTotalStats(messages []*message) {
 	for m, message := range messages {
 		fmt.Printf("%+v\n", m)
+		// allText
+		addMessageToWords := true
+		for _, prefix := range actionPrefixes {
+			if strings.HasPrefix(message.Text, prefix) {
+				addMessageToWords = false
+			}
+		}
+		cloudifiedMessages := cloudifyMessage(message.Text)
+
+		if addMessageToWords {
+			*totalStats.AllWords = append(*totalStats.AllWords, cloudifiedMessages...)
+		}
 		// intervalTotals
 		for i, interval := range yearsIntervals {
 			if len(yearsIntervals) > (i+2) && message.Timestamp.After(yearsIntervals[i]) && message.Timestamp.Before(yearsIntervals[i+1]) {

@@ -2,27 +2,28 @@ package main
 
 import (
 	"fmt"
+	"github.com/bbalet/stopwords"
 	"strings"
 )
 
 var personStats = map[string]*statBucket{
-	"Jimmy":   &statBucket{Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
-	"Scott":   &statBucket{Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
-	"Erik":    &statBucket{Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
-	"Ian":     &statBucket{Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
-	"Rengel":  &statBucket{Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
-	"Kimble":  &statBucket{Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
-	"Chad":    &statBucket{Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
-	"Houman":  &statBucket{Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
-	"Dehaan":  &statBucket{Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
-	"Cam":     &statBucket{Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
-	"Mark":    &statBucket{Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
-	"Dubov":   &statBucket{Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
-	"Clayton": &statBucket{Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
-	"Matt":    &statBucket{Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
-	"Dylan":   &statBucket{Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
-	"Brock":   &statBucket{Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
-	"":        &statBucket{Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
+	"Jimmy":   &statBucket{AllGoodWords: &[]string{}, Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
+	"Scott":   &statBucket{AllGoodWords: &[]string{}, Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
+	"Erik":    &statBucket{AllGoodWords: &[]string{}, Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
+	"Ian":     &statBucket{AllGoodWords: &[]string{}, Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
+	"Rengel":  &statBucket{AllGoodWords: &[]string{}, Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
+	"Kimble":  &statBucket{AllGoodWords: &[]string{}, Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
+	"Chad":    &statBucket{AllGoodWords: &[]string{}, Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
+	"Houman":  &statBucket{AllGoodWords: &[]string{}, Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
+	"Dehaan":  &statBucket{AllGoodWords: &[]string{}, Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
+	"Cam":     &statBucket{AllGoodWords: &[]string{}, Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
+	"Mark":    &statBucket{AllGoodWords: &[]string{}, Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
+	"Dubov":   &statBucket{AllGoodWords: &[]string{}, Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
+	"Clayton": &statBucket{AllGoodWords: &[]string{}, Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
+	"Matt":    &statBucket{AllGoodWords: &[]string{}, Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
+	"Dylan":   &statBucket{AllGoodWords: &[]string{}, Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
+	"Brock":   &statBucket{AllGoodWords: &[]string{}, Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
+	"":        &statBucket{AllGoodWords: &[]string{}, Total: 0, RespondingTo: &map[string]int{}, ActionsReceived: &map[string]int{}, ActionsSent: &map[string]int{}},
 }
 
 var actionPrefixes = []string{"Emphasized", "Laughed", "Disliked", "Liked", "Questioned", "Loved"}
@@ -32,6 +33,7 @@ type statBucket struct {
 	RespondingTo    *map[string]int `json:"respondingTo"`
 	ActionsReceived *map[string]int `json:"actionsReceived"`
 	ActionsSent     *map[string]int `json:"actionsSent"`
+	AllGoodWords    *[]string       `json:"allWords"`
 }
 
 func messagesToPersonStats(messages []*message) {
@@ -42,12 +44,39 @@ func messagesToPersonStats(messages []*message) {
 		statBucket := personStats[message.Person]
 		statBucket.Total++
 
+		addMessageToWords := true
+		for _, prefix := range actionPrefixes {
+			if strings.HasPrefix(message.Text, prefix) {
+				addMessageToWords = false
+			}
+		}
+
+		cloudifiedMessages := cloudifyMessage(message.Text)
+
+		if addMessageToWords {
+			*statBucket.AllGoodWords = append(*statBucket.AllGoodWords, cloudifiedMessages...)
+		}
+
 		if i != 0 {
 			markRespondingTo(statBucket, lastMessage)
 			markActions(statBucket, *message, messages)
 		}
 		lastMessage = message
 	}
+}
+
+func cloudifyMessage(text string) []string {
+	cleanContent := stopwords.CleanString(text, "en", true)
+	splitContent := strings.Split(cleanContent, " ")
+
+	filtered := []string{}
+	for _, word := range splitContent {
+		if word != "" {
+			filtered = append(filtered, word)
+		}
+	}
+
+	return filtered
 }
 
 func markRespondingTo(statBucket *statBucket, lastMessage *message) {

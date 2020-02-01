@@ -11,6 +11,7 @@ type cumulativeStat struct {
 	TotalByHour    *map[int]int
 	TotalByDoW     *map[int]int
 	IntervalTotals *map[time.Time]int
+	AllCleanWords  *[]string
 	AllWords       *[]string
 }
 
@@ -20,7 +21,7 @@ var end = "2020-01-01"
 var startingDate, _ = time.Parse(layout, start)
 var endingDate, _ = time.Parse(layout, end)
 
-var totalStats = cumulativeStat{TotalByHour: &map[int]int{}, TotalByDoW: &map[int]int{}, IntervalTotals: &map[time.Time]int{}, AllWords: &[]string{}}
+var totalStats = cumulativeStat{TotalByHour: &map[int]int{}, TotalByDoW: &map[int]int{}, IntervalTotals: &map[time.Time]int{}, AllCleanWords: &[]string{}, AllWords: &[]string{}}
 
 var yearsIntervals = fillIntervals(startingDate, endingDate)
 
@@ -49,9 +50,11 @@ func messagesToTotalStats(messages []*message) {
 			}
 		}
 		cloudifiedMessages := cloudifyMessage(message.Text)
+		regularMessages := regularCleanMessage(message.Text)
 
 		if addMessageToWords {
-			*totalStats.AllWords = append(*totalStats.AllWords, cloudifiedMessages...)
+			*totalStats.AllCleanWords = append(*totalStats.AllCleanWords, cloudifiedMessages...)
+			*totalStats.AllWords = append(*totalStats.AllWords, regularMessages...)
 		}
 		// intervalTotals
 		for i, interval := range yearsIntervals {

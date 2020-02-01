@@ -7,11 +7,24 @@ import (
 
 func savePersonFiles() {
 	for k, v := range personStats {
-		filename := fmt.Sprintf("%s.txt", k)
+		filename := fmt.Sprintf("%s_clean.txt", k)
 		f, _ := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 
 		sep := " "
 		for _, word := range *v.AllGoodWords {
+			if _, err := f.WriteString(word + sep); err != nil {
+				panic(err)
+			}
+		}
+		f.Close()
+	}
+
+	for k, v := range personStats {
+		filename := fmt.Sprintf("%s_all.txt", k)
+		f, _ := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+
+		sep := " "
+		for _, word := range *v.AllWords {
 			if _, err := f.WriteString(word + sep); err != nil {
 				panic(err)
 			}

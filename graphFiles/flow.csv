@@ -1,0 +1,5 @@
+originregion_id,originregion_name,destinationregion_id,destinationregion_name,regionflow_1990,regionflow_1995,regionflow_2000,regionflow_2005,xxx,origin_iso,origin_name,destination_iso,destination_name,countryflow_1990,countryflow_1995,countryflow_2000,countryflow_2005,origin_show,destination_show
+1,Red,2,Blue,10,20,30,40,,CAN,Canada,USA,UnitedStates,0,0,0,0,1,1
+2,Blue,3,Yellow,10,20,30,40,,USA,UnitedStates,RUS,Russia,0,0,0,0,1,1
+3,Yellow,4,Green,10,20,30,40,,RUS,Russia,JAP,Japan,0,0,0,0,1,1
+4,Green,2,Blue,10,20,30,40,,JAP,Japan,USA,UnitedStates,0,0,0,0,1,1

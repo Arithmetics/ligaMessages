@@ -8,11 +8,12 @@ import (
 
 func main() {
 	allMessages := convertCSV("LigaTexts.csv")
-	messagesToTotalStats(allMessages)
-	// messagesToPersonStats(allMessages)
+	// messagesToTotalStats(allMessages)
+	messagesToPersonStats(allMessages)
 	// saveTotalStatsFiles(allMessages)
 	// savePersonFiles()
-	makeWorkCloud()
+	// makeWorkCloud()
+	makeCircularCSV()
 }
 
 func makeWorkCloud() {

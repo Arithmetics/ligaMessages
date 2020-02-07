@@ -1,0 +1,17 @@
+originregion_id,originregion_name,destinationregion_id,destinationregion_name,regionflow_1990,regionflow_1995,regionflow_2000,regionflow_2005,xxx,origin_iso,origin_name,destination_iso,destination_name,countryflow_1990,countryflow_1995,countryflow_2000,countryflow_2005,origin_show,destination_show
+1,Brock,1,Brock,57617,191071,84668,96102,,USA,United States,USA,United States,0,0,0,10000,1,1
+1,Brock,6,Erik,60182,457,62788,158,,USA,United States,IND,India,27,0,0,100000,1,1
+1,Brock,7,Alex,17696,16407,21304,39145,,USA,United States,CHN,China,1633,20,5373,11317,1,1
+1,Brock,9,Spaceman,37118,5149,30115,52303,,USA,United States,AUS,Australia,1000000,1000000,94289,2000,1,1
+6,Erik,1,Brock,416024,887463,1127535,1508008,,IND,India,USA,United States,202309,379890,638048,701242,1,1
+6,Erik,6,Erik,5877911,1707731,1903789,1307907,,IND,India,IND,India,0,0,0,0,1,1
+6,Erik,7,Alex,22526,60319,35967,73599,,IND,India,CHN,China,709,2331,3270,5167,1,1
+6,Erik,9,Spaceman,53388,94580,219683,347420,,IND,India,AUS,Australia,16249,21466,134580,182645,1,1
+7,Alex,1,Brock,804751,966843,1526195,1057904,,CHN,China,USA,United States,222772,276024,796005,615536,1,1
+7,Alex,6,Erik,11484,5552,32787,117,,CHN,China,IND,India,0,0,600,0,1,1
+7,Alex,7,Alex,564165,490148,724145,781316,,CHN,China,CHN,China,0,0,0,0,1,1
+7,Alex,9,Spaceman,113500,75203,293721,278746,,CHN,China,AUS,Australia,42114,25324,151508,150947,1,1
+9,Spaceman,1,Brock,29020,81612,49489,27137,,AUS,Australia,USA,United States,1000000,1000000,1000000,1000000,1,1
+9,Spaceman,6,Erik,3134,2704,936,5,,AUS,Australia,IND,India,0,0,0,0,1,1
+9,Spaceman,7,Alex,4393,8388,3505,5659,,AUS,Australia,CHN,China,362,843,1070,1554,1,1
+9,Spaceman,9,Spaceman,92573,108208,161615,190706,,AUS,Australia,AUS,Australia,0,0,0,0,1,1

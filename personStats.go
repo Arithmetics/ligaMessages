@@ -57,7 +57,7 @@ func messagesToPersonStats(messages []*message) {
 
 		if addMessageToWords {
 			*statBucket.AllGoodWords = append(*statBucket.AllGoodWords, cloudifiedMessages...)
-			*statBucket.AllWords = append(*statBucket.AllGoodWords, regularMessages...)
+			*statBucket.AllWords = append(*statBucket.AllWords, regularMessages...)
 		}
 
 		if i != 0 {
@@ -74,7 +74,7 @@ func cloudifyMessage(text string) []string {
 
 	filtered := []string{}
 	for _, word := range splitContent {
-		if word != "" || word != "I" || word != "i" {
+		if word != "" && word != "I" && word != "i" {
 			filtered = append(filtered, word)
 		}
 	}

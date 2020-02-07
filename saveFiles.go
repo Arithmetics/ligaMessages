@@ -33,13 +33,23 @@ func savePersonFiles() {
 	}
 }
 
-func saveTotalStatsFiles() {
+func saveTotalStatsFiles(allMessages []*message) {
 	// write all words to file
 	// If the file doesn't exist, create it, or append to the file
 	f, _ := os.OpenFile("allWords.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 
 	sep := " "
 	for _, word := range *totalStats.AllWords {
+		if _, err := f.WriteString(word + sep); err != nil {
+			panic(err)
+		}
+	}
+	f.Close()
+
+	f, _ = os.OpenFile("cleanWords.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+
+	sep = " "
+	for _, word := range *totalStats.AllCleanWords {
 		if _, err := f.WriteString(word + sep); err != nil {
 			panic(err)
 		}
@@ -75,6 +85,16 @@ func saveTotalStatsFiles() {
 
 	for k, v := range *totalStats.IntervalTotals {
 		if _, err := f.WriteString(fmt.Sprintf("%v,%d\n", k, v)); err != nil {
+			panic(err)
+		}
+	}
+	f.Close()
+
+	f, _ = os.OpenFile("allTextDateStamped.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+
+	sep = ","
+	for _, message := range allMessages {
+		if _, err := f.WriteString(message.Timestamp.Format("2006-01-02 15:04:05") + sep + message.Text + "\n"); err != nil {
 			panic(err)
 		}
 	}

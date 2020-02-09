@@ -9,7 +9,7 @@
       "type": "go",
       "request": "launch",
       "mode": "auto",
-      "program": "/Users/brocktillotson/go/src/github.com/arithmetics/ligaMessages/main.go",
+      "program": "/Users/brocktillotson/Desktop/ligaMessages/main.go",
       "env": {},
       "args": []
     }

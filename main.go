@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	allMessages := convertCSV("LigaTexts.csv")
+	allMessages := convertCSV("2017.csv")
 	// messagesToTotalStats(allMessages)
 	messagesToPersonStats(allMessages)
 	// saveTotalStatsFiles(allMessages)

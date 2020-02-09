@@ -38,7 +38,7 @@ var personNumKey = map[string]int{
 // }
 
 func makeCircularCSV() {
-	filename := fmt.Sprintf("circular.csv")
+	filename := fmt.Sprintf("circular2017.csv")
 	f, _ := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 
 	for originPerson, bucket := range personStats {

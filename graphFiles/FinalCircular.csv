@@ -1,4 +1,4 @@
-originregion_id,originregion_name,destinationregion_id,destinationregion_name,regionflow_1990,regionflow_1995,regionflow_2000,regionflow_2005,xxx,origin_iso,origin_name,destination_iso,destination_name,countryflow_1990,countryflow_1995,countryflow_2000,countryflow_2005,origin_show,destination_show
+originregion_id,originregion_name,destinationregion_id,destinationregion_name,regionflow_2016,regionflow_2017,regionflow_2018,regionflow_2019,xxx,origin_iso,origin_name,destination_iso,destination_name,countryflow_2016,countryflow_2017,countryflow_2018,countryflow_2019,origin_show,destination_show
 15,Brock,15,Brock,1,488000,507000,1033000,,Brock,Brock,Brock,Brock,1,488000,507000,1033000,1,1
 15,Brock,9,Cam,1,49000,91000,163000,,Brock,Brock,Cam,Cam,1,49000,91000,163000,1,1
 15,Brock,6,Chad,1,59000,157000,443000,,Brock,Brock,Chad,Chad,1,59000,157000,443000,1,1
